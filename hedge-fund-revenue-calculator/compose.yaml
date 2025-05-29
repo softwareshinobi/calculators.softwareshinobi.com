@@ -1,0 +1,18 @@
+services:
+
+    calculator-hedge-fund-revenue:
+
+        container_name: calculator-hedge-fund-revenue
+
+        image: softwareshinobi/calculator-hedge-fund-revenue
+
+        build: 
+
+            context: .
+
+            dockerfile: Dockerfile
+
+        ports:
+
+            - 8888:80
+

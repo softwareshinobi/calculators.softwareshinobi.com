@@ -1,0 +1,18 @@
+services:
+
+    calculator-facebook-paidads-roas:
+
+        container_name: calculator-facebook-paidads-roas
+
+        image: softwareshinobi/calculator-facebook-paidads-roas
+
+        build: 
+
+            context: .
+
+            dockerfile: Dockerfile
+
+        ports:
+
+            - 8888:80
+
