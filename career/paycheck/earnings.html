@@ -1,49 +1,63 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Paycheck and Income Calculator / Software Shinobi</title>
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+
     <!-- Bootswatch Pulse Theme (Based on Bootstrap 5.3) -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootswatch@5.3.3/dist/sketchy/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootswatch@5.3.3/dist/quartz/bootstrap.min.css">
     <!-- Load Font Awesome for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
     <style>
         /* Custom Styles for better spacing and readability */
         body {
-            padding-top: 70px; /* Space for the fixed/sticky navbar */
-            padding-bottom: 70px; /* Space for the fixed footer */
-            background-color: #0b0b14; /* Match Pulse theme background */
+            padding-top: 70px;
+            /* Space for the fixed/sticky navbar */
+            padding-bottom: 70px;
+            /* Space for the fixed footer */
+            / background-color: #0b0b14;
+            /* Match Pulse theme background */
             font-family: 'Inter', sans-serif;
         }
+
         .jumbotron {
             padding: 2rem 1rem;
             margin-bottom: 2rem;
             background-color: #212130;
             border-radius: .3rem;
         }
+
         .card {
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         }
+
         .highlight {
             font-weight: 600;
-            color: var(--bs-info); /* Use primary color for highlights */
+            color: var(--bs-info);
+            /* Use primary color for highlights */
             font-size: 1.25rem;
         }
+
         .input-card {
             background-color: #12121e;
         }
     </style>
 </head>
+
 <body>
 
     <!-- Sticky Navigation Header -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+    <nav class="navbar navbar-expand-lg bg-primary fixed-top" data-bs-theme="dark">
+
         <div class="container-fluid">
             <a class="navbar-brand" href="#">
                 <i class="fas fa-calculator me-2"></i> Income Analyzer
             </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
@@ -61,7 +75,8 @@
     <div class="container mt-5">
         <div class="jumbotron text-white">
             <h1 class="display-5">Paycheck & Income Calculator</h1>
-            <p class="lead">Estimate your equivalent annual income and net pay based on hourly wage or yearly salary.</p>
+            <p class="lead">Estimate your equivalent annual income and net pay based on hourly wage or yearly salary.
+            </p>
         </div>
 
         <div class="row justify-content-center">
@@ -69,56 +84,71 @@
                 <div class="card p-4 input-card border-info">
                     <h5 class="card-title text-info mb-4">Input Your Earnings</h5>
                     <div class="row g-4">
-                        <!-- Hourly Wage Input -->
-                        <div class="col-md-6">
-                            <label for="hourlyWage" class="form-label text-light">Hourly Wage ($/hour)</label>
-                            <div class="input-group">
-                                <span class="input-group-text">$</span>
-                                <input type="number" id="hourlyWage" class="form-control" placeholder="e.g., 50.00" aria-label="Hourly Wage" min="0" step="0.01">
-                            </div>
-                            <small class="form-text text-muted">Enter a value here to prioritize the hourly calculation.</small>
-                        </div>
+
                         <!-- Yearly Salary Input -->
                         <div class="col-md-6">
                             <label for="yearlySalary" class="form-label text-light">Yearly Salary ($/year)</label>
                             <div class="input-group">
                                 <span class="input-group-text">$</span>
-                                <input type="number" id="yearlySalary" class="form-control" placeholder="e.g., 100000" aria-label="Yearly Salary" min="0" step="1">
+                                <input type="number" id="yearlySalary" class="form-control" placeholder="e.g., 200000"
+                                    aria-label="Yearly Salary" min="100000" step="1000">
                             </div>
-                            <small class="form-text text-muted">Enter a value here to prioritize the salary calculation.</small>
+                            <small class="form-text text-muted">Enter a value here to prioritize the salary
+                                calculation.</small>
                         </div>
+
+                        <!-- Hourly Wage Input -->
+                        <div class="col-md-6">
+                            <label for="hourlyWage" class="form-label text-light">Hourly Wage ($/hour)</label>
+                            <div class="input-group">
+                                <span class="input-group-text">$</span>
+                                <input type="number" id="hourlyWage" class="form-control" placeholder="e.g., 100.00"
+                                    aria-label="Hourly Wage" min="100" step="5">
+                            </div>
+                            <small class="form-text text-muted">Enter a value here to prioritize the hourly
+                                calculation.</small>
+                        </div>
+
                     </div>
                 </div>
 
                 <!-- Results Section -->
                 <div class="card mt-5 p-4 border-success">
-                    <h5 class="card-title text-success mb-4">Calculated Estimates (Assumed: 40 hrs/week, 25% Tax Rate)</h5>
+                    <h5 class="card-title text-success mb-4">Calculated Estimates (Assumed: ~31% Effective Tax Rate)
+                    </h5>
                     <div id="results" class="row">
 
                         <div class="col-md-6 mb-3">
-                            <p class="mb-1 text-muted">Hourly Equivalent:</p>
-                            <p class="h4"><span id="hourlyEquivalent" class="highlight">0.00</span> $/hour</p>
-                        </div>
-
-                        <div class="col-md-6 mb-3">
                             <p class="mb-1 text-muted">Annual Equivalent (Gross):</p>
-                            <p class="h4"><span id="annualEquivalent" class="highlight">0.00</span> $/year</p>
+                            <p class="h4">$&nbsp;<span id="annualEquivalent" class="highlight">0.00</span> / year</p>
                         </div>
 
                         <div class="col-md-6 mb-3">
-                            <p class="mb-1 text-muted">Semi-Monthly Pay (Gross):</p>
-                            <p class="h4"><span id="semiMonthly" class="highlight">0.00</span> $</p>
+                            <p class="mb-1 text-muted">Hourly Equivalent:</p>
+                            <p class="h4">$&nbsp;<span id="hourlyEquivalent" class="highlight">0.00</span> / hour</p>
                         </div>
+
+
+
+
 
                         <div class="col-md-6 mb-3">
                             <p class="mb-1 text-muted">Net Annual (After Taxes):</p>
-                            <p class="h4"><span id="netAnnual" class="highlight">0.00</span> $/year</p>
+                            <p class="h4">$&nbsp;<span id="netAnnual" class="highlight">0.00</span> / year</p>
                         </div>
+
+
+                        <div class="col-md-6 mb-3">
+                            <p class="mb-1 text-muted">Semi-Monthly Pay (Gross):</p>
+                            <p class="h4">$&nbsp;<span id="semiMonthly" class="highlight">0.00</span> </p>
+                        </div>
+
 
                     </div>
                 </div>
 
-                <p class="mt-4 text-center text-muted"><small>Note: Calculations are estimates based on standard 2080 work hours and a flat ~31% tax rate.</small></p>
+                <p class="mt-4 text-center text-muted"><small>Note: Calculations are estimates based on standard 2080
+                        work hours and a flat ~31% tax rate.</small></p>
 
             </div>
         </div>
@@ -126,8 +156,8 @@
 
     <!-- Fixed Footer -->
     <footer class="footer bg-dark fixed-bottom">
-        <div class="container text-center py-3">
-            <span class="text-muted">© 2024 Income Calculator | Bootswatch Pulse Theme</span>
+        <div class="container text-center py-2">
+            <span class="text-muted">© 2025 Paycheck and Income Calculator | Software Shinobi</span>
         </div>
     </footer>
 
@@ -135,6 +165,6 @@
 
     <script src="earnings.js"></script>
 
-
 </body>
+
 </html>
