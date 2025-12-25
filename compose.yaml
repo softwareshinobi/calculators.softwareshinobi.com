@@ -1,10 +1,10 @@
 services:
 
-    calculators.softwareshinobi.com:
+    calculators.softwareshinobi.online:
 
-        container_name: calculators.softwareshinobi.com
+        container_name: calculators.softwareshinobi.online
         
-        image: softwareshinobi/calculators.softwareshinobi.com
+        image: softwareshinobi/calculators.softwareshinobi.online
 
         build: 
 
